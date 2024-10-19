@@ -9,7 +9,7 @@ Group=__APP__
 Environment="PATH=__PATH_WITH_NODEJS__"
 Environment="NODE_ENV=production"
 WorkingDirectory=__INSTALL_DIR__/
-PIDFile=/opt/cronicle/logs/cronicled.pid
+#PIDFile=/opt/cronicle/logs/cronicled.pid
 ExecStart=__INSTALL_DIR__/bin/control.sh start
 ExecStop=__INSTALL_DIR__/bin/control.sh stop
 Restart=on-failure
