@@ -16,7 +16,6 @@ license = "MIT"
 website = "https://cronicle.net/"
 demo = "https://demo.example.com"
 admindoc = "https://github.com/jhuckaby/Cronicle/blob/master/docs/Setup.md#single-server"
-userdoc = "https://yunohost.org/apps"
 code = "https://github.com/jhuckaby/Cronicle"
 
 [integration]

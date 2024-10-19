@@ -3,6 +3,8 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+key=$(ynh_string_random --length=45 | base64)
+
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
@@ -24,10 +26,10 @@ chown -R "$app:www-data" "$install_dir"
 #=================================================
 ynh_script_progression "Adding $app's configuration files..."
 
-ynh_config_add --template="some_config_file" --destination="$install_dir/some_config_file"
+ynh_config_add --template="config.json" --destination="$install_dir/config.json"
 
-chmod 400 "$install_dir/some_config_file"
-chown "$app:$app" "$install_dir/some_config_file"
+chmod 400 "$install_dir/config.json"
+chown "$app:$app" "$install_dir/config.json"
 
 #=================================================
 # SYSTEM CONFIGURATION
@@ -41,11 +43,14 @@ ynh_config_add_systemd
 yunohost service add "$app" --description="A short description of the app" --log="/var/log/$app/$app.log"
 
 #=================================================
-# SETUP APPLICATION WITH CURL
+# INSTALL DODOC
 #=================================================
+ynh_script_progression "Installing the app..."
 
-npm install
-node bin/build.js dist
+pushd "$install_dir"
+ 	ynh_hide_warnings ynh_exec_as_app npm install
+ 	ynh_hide_warnings ynh_exec_as_app bin/build.js dist
+popd
 
 #=================================================
 # START SYSTEMD SERVICE

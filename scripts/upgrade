@@ -22,7 +22,7 @@ ynh_nodejs_install
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-ynh_setup_source --dest_dir="$install_dir" --full_replace --keep=".env data"
+ynh_setup_source --dest_dir="$install_dir" --full_replace --keep="config.json"
 
 chown -R "$app:www-data" "$install_dir"
 
@@ -31,10 +31,10 @@ chown -R "$app:www-data" "$install_dir"
 #=================================================
 ynh_script_progression "Updating $app's configuration files..."
 
-ynh_config_add --template="some_config_file" --destination="$install_dir/some_config_file"
+ynh_config_add --template="config.json" --destination="$install_dir/config.json"
 
-chmod 400 "$install_dir/some_config_file"
-chown "$app:$app" "$install_dir/some_config_file"
+chmod 400 "$install_dir/config.json"
+chown "$app:$app" "$install_dir/config.json"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
