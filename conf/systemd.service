@@ -9,8 +9,11 @@ Group=__APP__
 Environment="PATH=__PATH_WITH_NODEJS__"
 Environment="NODE_ENV=production"
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__NODEJS_DIR__/node __INSTALL_DIR__/lib/main.js
+PIDFile=/opt/cronicle/logs/cronicled.pid
+ExecStart=__INSTALL_DIR__/bin/control.sh start
+ExecStop=__INSTALL_DIR__/bin/control.sh stop
 Restart=on-failure
+
 
 ### Depending on specificities of your service/app, you may need to tweak these
 ### .. but this should be a good baseline
